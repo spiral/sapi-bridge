@@ -1,0 +1,52 @@
+{
+    "name": "spiral/sapi-bridge",
+    "description": "Spiral Framework SAPI bridge",
+    "keywords": [
+        "SAPI",
+        "spiral",
+        "sapi-bridge"
+    ],
+    "homepage": "https://github.com/spiral/sapi-bridge",
+    "license": "MIT",
+    "require": {
+        "php": "^8.1",
+        "spiral/core": "^3.0",
+        "spiral/boot": "^3.0",
+        "spiral/http": "^3.0",
+        "spiral/exceptions": "^3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5.20",
+        "spiral/testing": "^1.2",
+        "vimeo/psalm": "^4.22",
+        "spiral/framework": "^3.0",
+        "nyholm/psr7": "^1.5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Spiral\\Sapi\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\": "tests/app",
+            "Tests\\": "tests/src"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "psalm": "vendor/bin/psalm --config=psalm.xml ./src"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "spiral": {
+            "bootloaders": [
+                "Spiral\\Sapi\\Bootloader\\SapiBootloader"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
