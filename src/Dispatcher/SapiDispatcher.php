@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Spiral\Sapi\Dispatcher;
 
+use Nyholm\Psr7Server\ServerRequestCreatorInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -14,7 +15,6 @@ use Spiral\Exceptions\ExceptionHandlerInterface;
 use Spiral\Http\Http;
 use Spiral\Sapi\Dispatcher\Exception\InvalidEmitterException;
 use Spiral\Sapi\Emitter\SapiEmitter;
-use Spiral\Sapi\Request\RequestFactory;
 
 final class SapiDispatcher implements DispatcherInterface
 {
@@ -60,7 +60,7 @@ final class SapiDispatcher implements DispatcherInterface
 
     protected function initRequest(): ServerRequestInterface
     {
-        return $this->container->get(RequestFactory::class)->fromGlobals();
+        return $this->container->get(ServerRequestCreatorInterface::class)->fromGlobals();
     }
 
     protected function handleException(\Closure $emitter, \Throwable $e): void
