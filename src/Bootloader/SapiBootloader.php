@@ -8,7 +8,7 @@ use Nyholm\Psr7Server\ServerRequestCreator;
 use Nyholm\Psr7Server\ServerRequestCreatorInterface;
 use Spiral\Boot\AbstractKernel;
 use Spiral\Boot\Bootloader\Bootloader;
-use Spiral\Bootloader\Http\DiactorosBootloader;
+use Spiral\Http\Bootloader\DiactorosBootloader;
 use Spiral\Core\Container\SingletonInterface;
 use Spiral\Core\FactoryInterface;
 use Spiral\Http\Config\HttpConfig;

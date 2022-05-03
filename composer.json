@@ -42,6 +42,9 @@
         "sort-packages": true
     },
     "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        },
         "spiral": {
             "bootloaders": [
                 "Spiral\\Sapi\\Bootloader\\SapiBootloader"
