@@ -8,7 +8,7 @@ use Nyholm\Psr7Server\ServerRequestCreator;
 use Nyholm\Psr7Server\ServerRequestCreatorInterface;
 use Spiral\Boot\AbstractKernel;
 use Spiral\Boot\Bootloader\Bootloader;
-use Spiral\Bootloader\Http\DiactorosBootloader;
+use Spiral\Http\Bootloader\DiactorosBootloader;
 use Spiral\Core\Container\SingletonInterface;
 use Spiral\Core\FactoryInterface;
 use Spiral\Http\Config\HttpConfig;
@@ -28,17 +28,14 @@ final class SapiBootloader extends Bootloader implements SingletonInterface
 
     public function createEmitter(HttpConfig $config): SapiEmitter
     {
-        return new SapiEmitter();
-
-        /* TODO wait v2.13
         $emitter = new SapiEmitter();
         if (($chunkSize = $config->getChunkSize()) !== null) {
             $emitter->bufferSize = $chunkSize;
         }
-        */
+        return $emitter;
     }
 
-    public function boot(AbstractKernel $kernel, FactoryInterface $factory): void
+    public function init(AbstractKernel $kernel, FactoryInterface $factory): void
     {
         // Lowest priority
         $kernel->started(static function (AbstractKernel $kernel) use ($factory): void {

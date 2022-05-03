@@ -11,7 +11,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use Spiral\Boot\AbstractKernel;
 use Spiral\Bootloader\ExceptionHandlerBootloader;
-use Spiral\Bootloader\Http\DiactorosBootloader;
+use Spiral\Http\Bootloader\DiactorosBootloader;
 use Spiral\Bootloader\Http\ErrorHandlerBootloader;
 use Spiral\Bootloader\Http\HttpBootloader;
 use Spiral\Bootloader\Http\RouterBootloader;
