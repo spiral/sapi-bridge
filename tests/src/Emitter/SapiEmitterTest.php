@@ -169,7 +169,6 @@ final class SapiEmitterTest extends TestCase
         $this->assertSame($emitter->bufferSize, 2_097_152);
     }
 
-    /* TODO waiting code from v2.13
     public function testChunkSize(): void
     {
         $bootloader = new SapiBootloader();
@@ -187,7 +186,6 @@ final class SapiEmitterTest extends TestCase
         $emitter = $bootloader->createEmitter(new HttpConfig(['chunkSize' => -1]));
         $this->assertSame($emitter->bufferSize, 2_097_152);
     }
-    */
 
     private function getHeaders(): array
     {
