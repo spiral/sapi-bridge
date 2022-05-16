@@ -18,8 +18,8 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5.20",
-        "spiral/testing": "^1.2",
-        "vimeo/psalm": "^4.22",
+        "spiral/testing": "^2.0",
+        "vimeo/psalm": "^4.23",
         "spiral/framework": "^3.0",
         "nyholm/psr7": "^1.5.0"
     },
@@ -39,7 +39,10 @@
         "psalm": "vendor/bin/psalm --config=psalm.xml ./src"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "spiral/composer-publish-plugin": false
+        }
     },
     "extra": {
         "branch-alias": {
