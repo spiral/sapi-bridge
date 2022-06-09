@@ -8,7 +8,6 @@ use Nyholm\Psr7Server\ServerRequestCreator;
 use Nyholm\Psr7Server\ServerRequestCreatorInterface;
 use Spiral\Boot\AbstractKernel;
 use Spiral\Boot\Bootloader\Bootloader;
-use Spiral\Http\Bootloader\DiactorosBootloader;
 use Spiral\Core\Container\SingletonInterface;
 use Spiral\Core\FactoryInterface;
 use Spiral\Http\Config\HttpConfig;
@@ -17,10 +16,6 @@ use Spiral\Sapi\Emitter\SapiEmitter;
 
 final class SapiBootloader extends Bootloader implements SingletonInterface
 {
-    protected const DEPENDENCIES = [
-        DiactorosBootloader::class,
-    ];
-
     protected const SINGLETONS = [
         SapiEmitter::class => [self::class, 'createEmitter'],
         ServerRequestCreatorInterface::class => ServerRequestCreator::class,
