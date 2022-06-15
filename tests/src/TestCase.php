@@ -6,16 +6,18 @@ namespace Tests;
 
 use App\Bootloader\AppBootloader;
 use App\TestApp;
-use Nyholm\Psr7\Response;
+use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use Spiral\Boot\AbstractKernel;
 use Spiral\Bootloader\ExceptionHandlerBootloader;
-use Spiral\Http\Bootloader\DiactorosBootloader;
 use Spiral\Bootloader\Http\ErrorHandlerBootloader;
 use Spiral\Bootloader\Http\HttpBootloader;
 use Spiral\Bootloader\Http\RouterBootloader;
 use Spiral\Bootloader\SnapshotsBootloader;
+use Spiral\Core\Container;
+use Spiral\Http\Config\HttpConfig;
+use Spiral\Nyholm\Bootloader\NyholmBootloader;
 use Spiral\Sapi\Bootloader\SapiBootloader;
 use Spiral\Sapi\Emitter\SapiEmitter;
 use Spiral\Testing\TestableKernelInterface;
@@ -29,9 +31,11 @@ abstract class TestCase extends SpiralTesting
         $body = null,
         string $version = '1.1'
     ): ResponseInterface {
-        $response = (new Response())
-            ->withStatus($status)
-            ->withProtocolVersion($version);
+        $this->getContainer()->bind(HttpConfig::class, new HttpConfig(['headers' => []]));
+
+        $factory = $this->getContainer()->get(ResponseFactoryInterface::class);
+        $response = $factory->createResponse($status)->withProtocolVersion($version);
+
         foreach ($headers as $header => $value) {
             $response = $response->withHeader($header, $value);
         }
@@ -62,7 +66,7 @@ abstract class TestCase extends SpiralTesting
         return [
             SnapshotsBootloader::class,
             HttpBootloader::class,
-            DiactorosBootloader::class,
+            NyholmBootloader::class,
             ErrorHandlerBootloader::class,
             RouterBootloader::class,
             SapiBootloader::class,
@@ -81,12 +85,11 @@ abstract class TestCase extends SpiralTesting
     /**
      * @return AbstractKernel|TestableKernelInterface
      */
-    public function createAppInstance(): TestableKernelInterface
+    public function createAppInstance(Container $container = new Container()): TestableKernelInterface
     {
-        return TestApp::createWithBootloaders(
-            $this->defineBootloaders(),
+        return TestApp::create(
             $this->defineDirectories($this->rootDirectory()),
             false
-        );
+        )->withBootloaders($this->defineBootloaders());
     }
 }

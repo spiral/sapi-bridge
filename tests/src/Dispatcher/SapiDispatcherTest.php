@@ -59,23 +59,23 @@ final class SapiDispatcherTest extends TestCase
     {
         $emitter = new BufferEmitter();
 
-        $app = $this->initApp([
+        $this->initApp([
             'DEBUG' => true
         ]);
 
-        $files = $app->getContainer()->get(FilesInterface::class)->getFiles(
-            $app->getContainer()->get(DirectoriesInterface::class)->get('runtime') . '/snapshots/'
+        $files = $this->getApp()->getContainer()->get(FilesInterface::class)->getFiles(
+            $this->getApp()->getContainer()->get(DirectoriesInterface::class)->get('runtime') . '/snapshots/'
         );
 
         $this->assertCount(0, $files);
 
         $_SERVER['REQUEST_URI'] = '/error';
-        $app->getContainer()->get(SapiDispatcher::class)->serve(
+        $this->getApp()->getContainer()->get(SapiDispatcher::class)->serve(
             \Closure::bind(function (ResponseInterface $response) {$this->emit($response);}, $emitter)
         );
 
-        $files = $app->getContainer()->get(FilesInterface::class)->getFiles(
-            $app->getContainer()->get(DirectoriesInterface::class)->get('runtime') . '/snapshots/'
+        $files = $this->getApp()->getContainer()->get(FilesInterface::class)->getFiles(
+            $this->getApp()->getContainer()->get(DirectoriesInterface::class)->get('runtime') . '/snapshots/'
         );
 
         $this->assertCount(1, $files);
