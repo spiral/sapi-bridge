@@ -21,7 +21,6 @@
         "phpunit/phpunit": "^9.5.20",
         "spiral/testing": "^2.0",
         "vimeo/psalm": "^4.23",
-        "spiral/framework": "^3.0",
         "spiral/nyholm-bridge": "^1.2"
     },
     "autoload": {
