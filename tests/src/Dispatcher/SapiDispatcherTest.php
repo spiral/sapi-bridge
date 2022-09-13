@@ -35,30 +35,6 @@ final class SapiDispatcherTest extends TestCase
     {
         $emitter = new BufferEmitter();
 
-        $files = $this->getContainer()->get(FilesInterface::class)->getFiles(
-            $this->getContainer()->get(DirectoriesInterface::class)->get('runtime') . '/snapshots/'
-        );
-
-        $this->assertCount(0, $files);
-
-        $_SERVER['REQUEST_URI'] = '/error';
-        $this->getContainer()->get(SapiDispatcher::class)->serve(
-            \Closure::bind(function (ResponseInterface $response) {$this->emit($response);}, $emitter)
-        );
-
-        $files = $this->getContainer()->get(FilesInterface::class)->getFiles(
-            $this->getContainer()->get(DirectoriesInterface::class)->get('runtime') . '/snapshots/'
-        );
-
-        $this->assertCount(1, $files);
-
-        $this->assertStringContainsString('500', (string) $emitter->response->getBody());
-    }
-
-    public function testDispatchNativeError(): void
-    {
-        $emitter = new BufferEmitter();
-
         $this->initApp([
             'DEBUG' => true
         ]);
