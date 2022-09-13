@@ -5,16 +5,15 @@ declare(strict_types=1);
 namespace Tests;
 
 use App\Bootloader\AppBootloader;
+use App\Bootloader\ExceptionHandlerBootloader;
+use App\Bootloader\HttpBootloader;
+use App\Bootloader\RouterBootloader;
+use App\Bootloader\SnapshotsBootloader;
 use App\TestApp;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use Spiral\Boot\AbstractKernel;
-use Spiral\Bootloader\ExceptionHandlerBootloader;
-use Spiral\Bootloader\Http\ErrorHandlerBootloader;
-use Spiral\Bootloader\Http\HttpBootloader;
-use Spiral\Bootloader\Http\RouterBootloader;
-use Spiral\Bootloader\SnapshotsBootloader;
 use Spiral\Core\Container;
 use Spiral\Http\Config\HttpConfig;
 use Spiral\Nyholm\Bootloader\NyholmBootloader;
@@ -67,7 +66,7 @@ abstract class TestCase extends SpiralTesting
             SnapshotsBootloader::class,
             HttpBootloader::class,
             NyholmBootloader::class,
-            ErrorHandlerBootloader::class,
+         //   ErrorHandlerBootloader::class,
             RouterBootloader::class,
             SapiBootloader::class,
             ExceptionHandlerBootloader::class,

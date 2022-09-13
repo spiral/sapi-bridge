@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Bootloader;
 
 use App\Controller\TestController;
-use Spiral\Bootloader\DomainBootloader;
+use Spiral\Boot\Bootloader\Bootloader;
 use Spiral\Router\Route;
 use Spiral\Router\RouterInterface;
 use Spiral\Router\Target\Controller;
 
-final class AppBootloader extends DomainBootloader
+final class AppBootloader extends Bootloader
 {
     public function boot(RouterInterface $router): void
     {
