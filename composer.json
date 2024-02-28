@@ -19,9 +19,10 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5.20",
-        "spiral/testing": "^2.0",
+        "spiral/testing": "dev-feature/scopes as 2.8.0",
+        "spiral/framework": "dev-feature/scopes as 3.12.0",
         "spiral/router": "^3.0",
-        "vimeo/psalm": "^4.23",
+        "vimeo/psalm": "^5.22",
         "spiral/nyholm-bridge": "^1.2"
     },
     "autoload": {
