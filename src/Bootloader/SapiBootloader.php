@@ -9,7 +9,6 @@ use Nyholm\Psr7Server\ServerRequestCreatorInterface;
 use Spiral\Boot\AbstractKernel;
 use Spiral\Boot\Bootloader\Bootloader;
 use Spiral\Core\Container\SingletonInterface;
-use Spiral\Core\FactoryInterface;
 use Spiral\Http\Config\HttpConfig;
 use Spiral\Sapi\Dispatcher\SapiDispatcher;
 use Spiral\Sapi\Emitter\SapiEmitter;
@@ -30,11 +29,11 @@ final class SapiBootloader extends Bootloader implements SingletonInterface
         return $emitter;
     }
 
-    public function init(AbstractKernel $kernel, FactoryInterface $factory): void
+    public function init(AbstractKernel $kernel): void
     {
         // Lowest priority
-        $kernel->booted(static function (AbstractKernel $kernel) use ($factory): void {
-            $kernel->addDispatcher($factory->make(SapiDispatcher::class));
+        $kernel->booted(static function (AbstractKernel $kernel): void {
+            $kernel->addDispatcher(SapiDispatcher::class);
         });
     }
 }
