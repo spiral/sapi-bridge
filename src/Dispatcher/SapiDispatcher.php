@@ -13,12 +13,11 @@ use Spiral\Attribute\DispatcherScope;
 use Spiral\Boot\DispatcherInterface;
 use Spiral\Boot\FinalizerInterface;
 use Spiral\Exceptions\ExceptionHandlerInterface;
-use Spiral\Framework\Spiral;
 use Spiral\Http\Http;
 use Spiral\Sapi\Dispatcher\Exception\InvalidEmitterException;
 use Spiral\Sapi\Emitter\SapiEmitter;
 
-#[DispatcherScope(Spiral::Http)]
+#[DispatcherScope('http')]
 final class SapiDispatcher implements DispatcherInterface
 {
     public function __construct(
@@ -28,7 +27,7 @@ final class SapiDispatcher implements DispatcherInterface
     ) {
     }
 
-    public function canServe(): bool
+    public static function canServe(): bool
     {
         return PHP_SAPI !== 'cli';
     }
