@@ -15,7 +15,7 @@ final class SapiDispatcherTest extends TestCase
 {
     public function testCantServe(): void
     {
-        $this->assertFalse($this->getContainer()->get(SapiDispatcher::class)->canServe());
+        $this->assertFalse(SapiDispatcher::canServe());
     }
 
     public function testDispatch(): void

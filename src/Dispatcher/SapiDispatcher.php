@@ -9,6 +9,7 @@ use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Spiral\Attribute\DispatcherScope;
 use Spiral\Boot\DispatcherInterface;
 use Spiral\Boot\FinalizerInterface;
 use Spiral\Exceptions\ExceptionHandlerInterface;
@@ -16,6 +17,7 @@ use Spiral\Http\Http;
 use Spiral\Sapi\Dispatcher\Exception\InvalidEmitterException;
 use Spiral\Sapi\Emitter\SapiEmitter;
 
+#[DispatcherScope('http')]
 final class SapiDispatcher implements DispatcherInterface
 {
     public function __construct(
@@ -25,7 +27,7 @@ final class SapiDispatcher implements DispatcherInterface
     ) {
     }
 
-    public function canServe(): bool
+    public static function canServe(): bool
     {
         return PHP_SAPI !== 'cli';
     }
@@ -42,6 +44,7 @@ final class SapiDispatcher implements DispatcherInterface
         /** @var Http $http */
         $http = $this->container->get(Http::class);
 
+        /** @var \Closure $emitter */
         $emitter ??= \Closure::bind(function (ResponseInterface $response) {
             if (!\method_exists($this, 'emit')) {
                 throw new InvalidEmitterException();
