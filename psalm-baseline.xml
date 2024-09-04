@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="5.25.0@01a8eb06b9e9cc6cfb6a320bf9fb14331919d505">
+  <file src="src/Bootloader/SapiBootloader.php">
+    <DeprecatedInterface>
+      <code><![CDATA[SapiBootloader]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Dispatcher/SapiDispatcher.php">
+    <DocblockTypeContradiction>
+      <code><![CDATA[\Closure::bind(function (ResponseInterface $response) {
+            if (!\method_exists($this, 'emit')) {
+                throw new InvalidEmitterException();
+            }
+            $this->emit($response);
+        }, $this->container->get(SapiEmitter::class))]]></code>
+    </DocblockTypeContradiction>
+    <MixedArgument>
+      <code><![CDATA[$this->container->get(SapiEmitter::class)]]></code>
+    </MixedArgument>
+    <MixedInferredReturnType>
+      <code><![CDATA[ServerRequestInterface]]></code>
+    </MixedInferredReturnType>
+    <MixedMethodCall>
+      <code><![CDATA[fromGlobals]]></code>
+    </MixedMethodCall>
+    <MixedReturnStatement>
+      <code><![CDATA[$this->container->get(ServerRequestCreatorInterface::class)->fromGlobals()]]></code>
+    </MixedReturnStatement>
+    <RedundantConditionGivenDocblockType>
+      <code><![CDATA[$emitter]]></code>
+    </RedundantConditionGivenDocblockType>
+  </file>
+  <file src="src/Emitter/SapiEmitter.php">
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[$header]]></code>
+    </MixedArgumentTypeCoercion>
+  </file>
+</files>

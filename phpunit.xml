@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
-         backupGlobals="false"
+         xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
          colors="true"
-         verbose="true"
-         bootstrap="./vendor/autoload.php"
-         failOnRisky="false"
+         cacheResultFile="runtime/phpunit/result.cache"
          failOnWarning="true"
-         convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true"
-         convertWarningsToExceptions="true"
-         stopOnFailure="false"
+         failOnRisky="true"
          executionOrder="random"
-         resolveDependencies="true"
+         stderr="true"
+         beStrictAboutOutputDuringTests="true"
 >
     <php>
         <ini name="display_errors" value="On" />
