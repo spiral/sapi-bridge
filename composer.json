@@ -68,10 +68,6 @@
             "Tests\\": "tests/src"
         }
     },
-    "scripts": {
-        "test": "vendor/bin/phpunit",
-        "psalm": "vendor/bin/psalm"
-    },
     "config": {
         "sort-packages": true,
         "allow-plugins": {
@@ -86,5 +82,18 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "scripts": {
+        "psalm": "psalm",
+        "psalm:baseline": "psalm --set-baseline=psalm-baseline.xml",
+        "psalm:ci": "psalm --output-format=github --shepherd --show-info=false --stats --threads=4",
+        "test": [
+            "@putenv XDEBUG_MODE=coverage",
+            "phpunit --color=always"
+        ],
+        "test:cc": [
+            "@putenv XDEBUG_MODE=coverage",
+            "phpunit --coverage-clover=runtime/phpunit/logs/clover.xml --color=always"
+        ]
+    }
 }
