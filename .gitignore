@@ -12,6 +12,7 @@ composer.lock
 Thumbs.db
 
 # Other
+runtime
 .phpunit.result.cache
 .php_cs.cache
 clover.xml
