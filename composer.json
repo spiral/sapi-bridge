@@ -51,7 +51,7 @@
     "require-dev": {
         "phpunit/phpunit": "^9.5.20",
         "spiral/dumper": "^3.3",
-        "spiral/framework": "^3.14",
+        "spiral/framework": "^3.14.1",
         "spiral/nyholm-bridge": "^1.2",
         "spiral/router": "^3.14",
         "spiral/testing": "^2.7",

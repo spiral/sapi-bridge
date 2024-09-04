@@ -13,6 +13,9 @@ use Tests\TestCase;
 
 final class SapiDispatcherTest extends TestCase
 {
+    private int $obLevel = 0;
+
+
     public function testCantServe(): void
     {
         $this->assertFalse(SapiDispatcher::canServe());
@@ -29,6 +32,7 @@ final class SapiDispatcherTest extends TestCase
             ->serve(\Closure::bind(function (ResponseInterface $response) {$this->emit($response);}, $emitter));
 
         $this->assertSame('Hello, Dave.', (string) $emitter->response->getBody());
+        self::assertSame(0, \ob_get_level());
     }
 
     public function testDispatchError(): void
@@ -57,5 +61,24 @@ final class SapiDispatcherTest extends TestCase
         $this->assertCount(1, $files);
 
         $this->assertStringContainsString('undefined', (string) $emitter->response->getBody());
+        self::assertSame(0, \ob_get_level());
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->obLevel = \ob_get_level();
+    }
+
+    protected function tearDown(): void
+    {
+        // Restore OB level
+        // SAPI Emitter resets OB level to 0 and does not restore it
+        while (\ob_get_level() < $this->obLevel) {
+            \ob_start();
+        }
+
+        parent::tearDown();
     }
 }
