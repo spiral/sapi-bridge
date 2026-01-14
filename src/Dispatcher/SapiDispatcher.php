@@ -32,7 +32,7 @@ final class SapiDispatcher implements DispatcherInterface
         return PHP_SAPI !== 'cli';
     }
 
-    public function serve(\Closure $emitter = null): void
+    public function serve(?\Closure $emitter = null): void
     {
         // On demand to save some memory.
 
